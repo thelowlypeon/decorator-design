@@ -5,12 +5,46 @@ Several plugins interact with eachother; for example, the project plugin may add
 
 Furthermore, each client has specific customizations that cannot conflict with their plugin combination.
 
+## This App's Structure
+
+This app is laid out as follows:
+
+```
+├── app.php
+├── base_models
+│   └── Invention.php
+├── clients
+│   ├── acme
+│   │   └── InventionDecorator.php
+│   └── dundermifflin
+│       └── InventionDecorator.php
+├── framework
+│   ├── BaseDecorator.php
+│   ├── BaseModel.php
+│   └── bootstrap.php
+└── plugins
+    └── project
+        └── InventionDecorator.php
+```
+
+For a more complex application, the ```Invention``` model would exist inside ```plugins/invention/```, but for this case let's consider it part of the core.
+
+Note there are two clients, and each _extend_ the ```Invention``` class. The classnames aren't necessary, but are of the format ```<baseobject>Decorator_<client>```.
+
+The project plugin also extends the ```Invention``` class, as ```<baseobject>Decorator_<plugin>```.
+
+The ```app.php``` file runs few simple commands, depending on which client you choose:
+
+```
+php app.php [clientname]
+```
+
 ## The Decorator Design Pattern
 
 A decorator design pattern is one which "wraps" functionality or attributes around a base object.
 This is especially useuful for single-inheritance languages, such as PHP (hence the language choice of this project). 
 
-## Simple Example
+### Simple Example
 
 (A gist for this example is [available here](https://gist.github.com/thelowlypeon/9585326#file-basic-coffee-decorator-php).)
 
