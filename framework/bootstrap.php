@@ -11,7 +11,7 @@ foreach (glob("framework/*.php") as $filename) {
     require_once($filename);
 }
 
-foreach (glob("base_models/*.php") as $filename) {
+foreach (glob("models/*.php") as $filename) {
     require_once($filename);
 }
 
